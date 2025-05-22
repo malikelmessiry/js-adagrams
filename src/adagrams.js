@@ -4,6 +4,8 @@ const letterPool = {
   'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1
 }
 
+// consider global var scopes. score chart can be in score function
+
 const getAllLetters = () => {
   let allLetters = [];
   for (const letter in letterPool) {
@@ -23,7 +25,13 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let lettersInHandCopy = [...lettersInHand];
+  for (const char of input.toUpperCase()) {
+    const index = lettersInHandCopy.indexOf(char);
+    if (index === -1) {
+      return false;
+    } lettersInHandCopy.splice(index, 1);
+  } return true;
 };
 
 export const scoreWord = (word) => {
