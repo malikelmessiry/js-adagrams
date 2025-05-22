@@ -36,7 +36,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
 
-  const SCORE_CHART = {
+  const scoreChart = {
     A: 1, B: 3, C: 3, D: 2, E: 1,
     F: 4, G: 2, H: 4, I: 1, J: 8,
     K: 5, L: 1, M: 3, N: 1, O: 1,
@@ -52,13 +52,30 @@ export const scoreWord = (word) => {
   }
 
   for (const char of word.toUpperCase()) {
-    score += SCORE_CHART[char];
+    score += scoreChart[char];
   } 
   return score;
 }
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+  let topScore = 0;
+  let topWord = '';
 
-  console.log(scoreWord('hello'));
+  for (const word of words) {
+    let wordScore = scoreWord(word);
+    if (wordScore > topScore) {
+      topWord = word;
+      topScore = wordScore;
+    } else if (wordScore === topScore) {
+      let isTenLetterWord = word.length === 10 && topWord.length !== 10;
+      let isShorterWord = word.length < topWord.length && topWord.length !== 10;
+      if (isTenLetterWord | isShorterWord) {
+        topWord = word;
+      }
+    }
+  }
+  return {
+    'word': topWord,
+    'score': topScore,
+  };
+}
