@@ -4,8 +4,6 @@ const letterPool = {
   'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1
 }
 
-// consider global var scopes. score chart can be in score function
-
 const getAllLetters = () => {
   let allLetters = [];
   for (const letter in letterPool) {
